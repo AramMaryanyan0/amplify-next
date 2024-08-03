@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { API, Storage } from 'aws-amplify'
+
 import { listPosts } from '../graphql/queries'
 
 export default function Home() {

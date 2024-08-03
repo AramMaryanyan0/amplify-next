@@ -1,7 +1,7 @@
 // pages/my-posts.js
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { API, Auth } from 'aws-amplify'
+
 import { postsByUsername } from '../graphql/queries'
 import { deletePost as deletePostMutation } from '../graphql/mutations'
 

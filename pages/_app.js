@@ -2,7 +2,7 @@ import '../styles/globals.css'
 import '../configureAmplify'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { Auth, Hub } from 'aws-amplify'
+
 
 function MyApp({ Component, pageProps }) {
   const [signedInUser, setSignedInUser] = useState(false)

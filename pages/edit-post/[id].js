@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
-import { API, Storage } from 'aws-amplify'
+
 import { useRouter } from 'next/router'
 import SimpleMDE from "react-simplemde-editor"
 import "easymde/dist/easymde.min.css"
@@ -52,7 +52,7 @@ function EditPost() {
     }
     // check to see if there is a cover image and that it has been updated
     if (coverImage && localImage) {
-      const fileName = `${coverImage.name}_${uuid()}` 
+      const fileName = `${coverImage.name}_${uuid()}`
       postUpdated.coverImage = fileName
       await Storage.put(fileName, coverImage)
     }
@@ -76,7 +76,7 @@ function EditPost() {
         placeholder="Title"
         value={post.title}
         className="border-b pb-2 text-lg my-4 focus:outline-none w-full font-light text-gray-500 placeholder-gray-500 y-2"
-      /> 
+      />
       <SimpleMDE value={post.content} onChange={value => setPost({ ...post, content: value })} />
       <input
         type="file"
@@ -85,8 +85,8 @@ function EditPost() {
         onChange={handleChange}
       />
       <button
-        className="bg-purple-600 text-white font-semibold px-8 py-2 rounded-lg mr-2" 
-        onClick={uploadImage}        
+        className="bg-purple-600 text-white font-semibold px-8 py-2 rounded-lg mr-2"
+        onClick={uploadImage}
       >
         Upload Cover Image
       </button>
@@ -97,4 +97,4 @@ function EditPost() {
   )
 }
 
-export default EditPost 
+export default EditPost

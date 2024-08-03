@@ -1,5 +1,4 @@
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
-import { Auth } from 'aws-amplify'
+
 import { useState, useEffect } from 'react'
 
 function Profile() {

@@ -1,6 +1,6 @@
-import { withAuthenticator } from '@aws-amplify/ui-react'
+
 import { useState, useRef } from 'react' // new
-import { API, Storage } from 'aws-amplify'
+
 import { v4 as uuid } from 'uuid'
 import { useRouter } from 'next/router'
 import SimpleMDE from "react-simplemde-editor"
@@ -20,7 +20,7 @@ function CreatePost() {
   }
   async function createNewPost() {
     if (!title || !content) return
-    const id = uuid() 
+    const id = uuid()
     post.id = id
     // If there is an image uploaded, store it in S3 and add it to the post metadata
     if (image) {
@@ -53,7 +53,7 @@ function CreatePost() {
         placeholder="Title"
         value={post.title}
         className="border-b pb-2 text-lg my-4 focus:outline-none w-full font-light text-gray-500 placeholder-gray-500 y-2"
-      /> 
+      />
       {
         image && (
           <img src={URL.createObjectURL(image)} className="my-4" />
@@ -67,8 +67,8 @@ function CreatePost() {
         onChange={handleChange}
       />
       <button
-        className="bg-purple-600 text-white font-semibold px-8 py-2 rounded-lg mr-2" 
-        onClick={uploadImage}        
+        className="bg-purple-600 text-white font-semibold px-8 py-2 rounded-lg mr-2"
+        onClick={uploadImage}
       >
         Upload Cover Image
       </button>
