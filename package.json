@@ -16,7 +16,7 @@
     "@azure/storage-blob": "^12.24.0",
     "@tailwindcss/typography": "0.5.13",
     "autoprefixer": "10.4.19",
-    "easymde": "2.0.1",
+    "easymde": "^2.0.1",
     "next": "14.3.0-canary.44",
     "postcss": "8.4.40",
     "react": "18.3.1",
