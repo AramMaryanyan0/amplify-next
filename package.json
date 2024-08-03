@@ -1,0 +1,29 @@
+{
+  "name": "amplify-next",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@azure/arm-appservice": "^15.0.0",
+    "@azure/arm-cosmosdb": "^16.0.0",
+    "@azure/core-rest-pipeline": "^1.16.3",
+    "@azure/functions": "^4.5.0",
+    "@azure/identity": "^4.4.1",
+    "@azure/storage-blob": "^12.24.0",
+    "@tailwindcss/typography": "0.5.13",
+    "autoprefixer": "10.4.19",
+    "easymde": "2.0.1",
+    "next": "14.3.0-canary.44",
+    "postcss": "8.4.40",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-markdown": "9.0.1",
+    "react-simplemde-editor": "5.2.0",
+    "tailwindcss": "3.0.5",
+    "uuid": "^8.3.2"
+  }
+}
