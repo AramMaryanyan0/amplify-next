@@ -1,12 +1,12 @@
 // pages/my-posts.js
 import { useState, useEffect } from 'react'
-import Link from 'next/link'
+/*import Link from 'next/link'
 
 import { postsByUsername } from '../graphql/queries'
-import { deletePost as deletePostMutation } from '../graphql/mutations'
+import { deletePost as deletePostMutation } from '../graphql/mutations'*/
 
 export default function MyPosts() {
-  const [posts, setPosts] = useState([])
+  /*const [posts, setPosts] = useState([])
   useEffect(() => {
     fetchPosts()
   }, [])
@@ -24,11 +24,11 @@ export default function MyPosts() {
       authMode: "AMAZON_COGNITO_USER_POOLS"
     })
     fetchPosts()
-  }
+  }*/
   return (
     <div>
       <h1 className="text-3xl font-semibold tracking-wide mt-6 mb-2">My Posts</h1>
-      {
+      {/*{
         posts.map((post, index) => (
           <div key={index} className="border-b border-gray-300	mt-8 pb-4">
             <h2 className="text-xl font-semibold">{post.title}</h2>
@@ -41,7 +41,7 @@ export default function MyPosts() {
             >Delete Post</button>
           </div>
         ))
-      }
+      }*/}
     </div>
   )
 }

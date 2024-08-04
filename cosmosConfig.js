@@ -1,11 +1,12 @@
-const { CosmosClient } = require("@azure/cosmos");
+import { CosmosClient } from '@azure/cosmos';
 
-const client = new CosmosClient({
-    endpoint: process.env.COSMOS_DB_ENDPOINT,
-    key: process.env.COSMOS_DB_KEY,
-});
+const endpoint = process.env.COSMOS_DB_ENDPOINT;
+const key = process.env.COSMOS_DB_KEY;
+const databaseId = process.env.COSMOS_DB_NAME;
+const containerId = process.env.COSMOS_DB_CONTAINER; // Используйте ваш идентификатор контейнера
 
-const database = client.database(process.env.COSMOS_DB_DATABASE);
-const container = database.container(process.env.COSMOS_DB_CONTAINER);
+const client = new CosmosClient({ endpoint, key });
+const database = client.database(databaseId);
+const container = database.container(containerId);
 
 export { container };

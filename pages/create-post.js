@@ -1,15 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
-import { v4 as uuid } from 'uuid';
+/*import { v4 as uuid } from 'uuid';
 import dynamic from 'next/dynamic';
 import 'easymde/dist/easymde.min.css';
 import { useRouter } from 'next/router';
 import { BlobServiceClient } from '@azure/storage-blob'; // Импорт Azure Blob Storage
 import axios from 'axios'; // Для отправки данных в Azure Function
 
-const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false });
+const SimpleMDE = dynamic(() => import('react-simplemde-editor'), { ssr: false });*/
 
 const CreatePost = () => {
-    const [post, setPost] = useState({ title: '', content: '' });
+    /*const [post, setPost] = useState({ title: '', content: '' });
     const [coverImage, setCoverImage] = useState(null);
     const [localImage, setLocalImage] = useState(null);
     const [isClient, setIsClient] = useState(false);
@@ -56,12 +56,12 @@ const CreatePost = () => {
 
     if (!isClient) {
         return null; // Возвращаем null, если код выполняется на сервере
-    }
+    }*/
 
     return (
         <div>
             <h1 className="text-3xl font-semibold tracking-wide mt-6">Create new post</h1>
-            <input
+            {/*<input
                 onChange={onChange}
                 name="title"
                 placeholder="Title"
@@ -89,7 +89,7 @@ const CreatePost = () => {
                 onClick={createNewPost}
             >
                 Create Post
-            </button>
+            </button>*/}
         </div>
     );
 };

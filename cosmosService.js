@@ -10,9 +10,15 @@ const getItems = async () => {
     return items;
 };
 
-export const fetchItems = async (query) => {
-    const { resources: items } = await container.items.query(query).fetchAll();
+const fetchItems = async (query, parameters = []) => {
+    console.log('Executing fetchItems with query:', query, 'and parameters:', parameters); // Отладочный вывод
+    const querySpec = {
+        query,
+        parameters,
+    };
+    const { resources: items } = await container.items.query(querySpec).fetchAll();
+    console.log('Fetched items:', items); // Отладочный вывод
     return items;
 };
 
-export { addItem, getItems };
+export { addItem, getItems, fetchItems };
