@@ -4,6 +4,11 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+variables:
+  COSMOS_DB_ENDPOINT: $(COSMOS_DB_ENDPOINT)
+  COSMOS_DB_KEY: $(COSMOS_DB_KEY)
+  COSMOS_DB_NAME: $(COSMOS_DB_NAME)
+
 steps:
   - task: UseNode@2
     inputs:
@@ -15,15 +20,11 @@ steps:
     displayName: 'npm install'
 
   - script: |
-      echo "COSMOS_DB_ENDPOINT=$(COSMOS_DB_ENDPOINT)" >> .env.local
-      echo "COSMOS_DB_KEY=$(COSMOS_DB_KEY)" >> .env.local
-      echo "COSMOS_DB_NAME=$(COSMOS_DB_NAME)" >> .env.local
+      echo "COSMOS_DB_ENDPOINT=$COSMOS_DB_ENDPOINT" >> .env.local
+      echo "COSMOS_DB_KEY=$COSMOS_DB_KEY" >> .env.local
+      echo "COSMOS_DB_NAME=$COSMOS_DB_NAME" >> .env.local
     displayName: 'Set environment variables'
 
   - script: |
       next build
     displayName: 'next build'
-    env:
-      COSMOS_DB_ENDPOINT: $(COSMOS_DB_ENDPOINT)
-      COSMOS_DB_KEY: $(COSMOS_DB_KEY)
-      COSMOS_DB_NAME: $(COSMOS_DB_NAME)
