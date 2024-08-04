@@ -1,2 +1,32 @@
-nextamplified:
-  component: "@sls-next/serverless-component@1.18.0"
+service: amplify-next
+
+provider:
+  name: azure
+  region: eastus  # Измените регион на доступный для вас
+  runtime: nodejs14.x
+  environment:
+    COSMOS_DB_ENDPOINT: ${env:COSMOS_DB_ENDPOINT}
+    COSMOS_DB_KEY: ${env:COSMOS_DB_KEY}
+
+functions:
+  app:
+    handler: handler.main
+    events:
+      - http:
+          path: /
+          method: get
+      - http:
+          path: /{proxy+}
+          method: any
+
+resources:
+  Resources:
+    CosmosDB:
+      Type: "Microsoft.DocumentDB/databaseAccounts"
+      Properties:
+        DatabaseAccountOfferType: Standard
+        Locations:
+          - LocationName: eastus  # Измените регион на доступный для вас
+        ConsistencyPolicy:
+          DefaultConsistencyLevel: "Session"
+        DatabaseAccountName: ${env:COSMOS_DB_NAME}
