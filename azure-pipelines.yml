@@ -4,26 +4,26 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-variables:
-  azureSubscription: '<YOUR_AZURE_SUBSCRIPTION>'
-  resourceGroup: '<YOUR_RESOURCE_GROUP>'
-  location: 'eastus'  # Измените регион на доступный для вас
-  appName: '<YOUR_APP_NAME>'
-
 steps:
-  - task: UseDotNet@2
+  - task: UseNode@2
     inputs:
-      packageType: 'sdk'
-      version: '5.x'
+      versionSpec: '18.x'
+    displayName: 'Install Node.js'
 
   - script: |
-      dotnet build --configuration Release
-    displayName: 'Build project'
+      npm install
+    displayName: 'npm install'
 
-  - task: AzureWebApp@1
-    inputs:
-      azureSubscription: $(azureSubscription)
-      appType: 'webAppLinux'
-      appName: $(appName)
-      resourceGroupName: $(resourceGroup)
-      package: $(System.DefaultWorkingDirectory)/**/*.zip
+  - script: |
+      echo "COSMOS_DB_ENDPOINT=$(COSMOS_DB_ENDPOINT)" >> $(Pipeline.Workspace)/.env
+      echo "COSMOS_DB_KEY=$(COSMOS_DB_KEY)" >> $(Pipeline.Workspace)/.env
+      echo "COSMOS_DB_NAME=$(COSMOS_DB_NAME)" >> $(Pipeline.Workspace)/.env
+    displayName: 'Set environment variables'
+
+  - script: |
+      next build
+    displayName: 'next build'
+    env:
+      COSMOS_DB_ENDPOINT: $(COSMOS_DB_ENDPOINT)
+      COSMOS_DB_KEY: $(COSMOS_DB_KEY)
+      COSMOS_DB_NAME: $(COSMOS_DB_NAME)
