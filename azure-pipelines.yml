@@ -1,0 +1,29 @@
+trigger:
+  - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  azureSubscription: '<YOUR_AZURE_SUBSCRIPTION>'
+  resourceGroup: '<YOUR_RESOURCE_GROUP>'
+  location: 'eastus'  # Измените регион на доступный для вас
+  appName: '<YOUR_APP_NAME>'
+
+steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '5.x'
+
+  - script: |
+      dotnet build --configuration Release
+    displayName: 'Build project'
+
+  - task: AzureWebApp@1
+    inputs:
+      azureSubscription: $(azureSubscription)
+      appType: 'webAppLinux'
+      appName: $(appName)
+      resourceGroupName: $(resourceGroup)
+      package: $(System.DefaultWorkingDirectory)/**/*.zip

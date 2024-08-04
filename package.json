@@ -11,12 +11,19 @@
     "@azure/arm-appservice": "^15.0.0",
     "@azure/arm-cosmosdb": "^16.0.0",
     "@azure/core-rest-pipeline": "^1.16.3",
+    "@azure/cosmos": "^4.0.0",
     "@azure/functions": "^4.5.0",
     "@azure/identity": "^4.4.1",
+    "@azure/msal-browser": "^3.20.0",
+    "@azure/msal-react": "^2.0.22",
     "@azure/storage-blob": "^12.24.0",
     "@tailwindcss/typography": "0.5.13",
+    "@types/codemirror": "^5.60.15",
+    "@types/react-dom": "^18.3.0",
     "autoprefixer": "10.4.19",
-    "easymde": "^2.0.1",
+    "axios": "^1.7.3",
+    "dotenv": "^16.4.5",
+    "easymde": "^2.10.1",
     "next": "14.3.0-canary.44",
     "postcss": "8.4.40",
     "react": "18.3.1",
@@ -25,5 +32,10 @@
     "react-simplemde-editor": "^5.2.0",
     "tailwindcss": "3.0.5",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/node": "22.1.0",
+    "@types/react": "^18.3.3",
+    "typescript": "5.5.4"
   }
 }
