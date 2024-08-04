@@ -15,11 +15,7 @@ steps:
     displayName: 'npm install'
 
   - script: |
-      echo "COSMOS_DB_ENDPOINT=$(COSMOS_DB_ENDPOINT)" >> .env.local
-      echo "COSMOS_DB_KEY=$(COSMOS_DB_KEY)" >> .env.local
-      echo "COSMOS_DB_NAME=$(COSMOS_DB_NAME)" >> .env.local
     displayName: 'Set environment variables'
 
   - script: |
-      npm run build
     displayName: 'next build'
