@@ -11,13 +11,13 @@ const getItems = async () => {
 };
 
 const fetchItems = async (query, parameters = []) => {
-    console.log('Executing fetchItems with query:', query, 'and parameters:', parameters); // Отладочный вывод
+    console.log('Executing fetchItems with query:', query, 'and parameters:', parameters);
     const querySpec = {
         query,
         parameters,
     };
     const { resources: items } = await container.items.query(querySpec).fetchAll();
-    console.log('Fetched items:', items); // Отладочный вывод
+    console.log('Fetched items:', items);
     return items;
 };
 

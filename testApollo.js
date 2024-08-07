@@ -1,11 +1,14 @@
-// posts.js
-import { ApolloServer } from '@apollo/server';
-import { startServerAndCreateNextHandler } from '@as-integrations/next';
-import { CosmosClient } from '@azure/cosmos';
-import gql from 'graphql-tag';
-
-// Загрузка переменных окружения
 require('dotenv-flow').config();
+
+console.log("COSMOS_DB_ENDPOINT:", process.env.COSMOS_DB_ENDPOINT);
+console.log("COSMOS_DB_KEY:", process.env.COSMOS_DB_KEY);
+console.log("COSMOS_DB_NAME:", process.env.COSMOS_DB_NAME);
+console.log("COSMOS_DB_CONTAINER:", process.env.COSMOS_DB_CONTAINER);
+
+const { ApolloServer } = require('@apollo/server');
+const { startStandaloneServer } = require('@apollo/server/standalone');
+const { CosmosClient } = require('@azure/cosmos');
+const gql = require('graphql-tag');
 
 const client = new CosmosClient({
     endpoint: process.env.COSMOS_DB_ENDPOINT,
@@ -43,29 +46,13 @@ const resolvers = {
     }
 };
 
-const apolloServer = new ApolloServer({
+const server = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
 });
 
-export const config = {
-    api: {
-        bodyParser: false
-    }
-};
-
-const handler = startServerAndCreateNextHandler(apolloServer);
-
-export default async (req, res) => {
-    let body = '';
-    req.on('data', chunk => {
-        body += chunk.toString(); // convert Buffer to string
-    });
-    req.on('end', () => {
-        console.log('Request received:', req.method, req.headers['content-type'], body);
-        if (body) {
-            req.body = JSON.parse(body);
-        }
-        return handler(req, res);
-    });
-};
+startStandaloneServer(server, {
+    listen: { port: 4000 },
+}).then(({ url }) => {
+    console.log(`🚀 Server ready at ${url}`);
+});

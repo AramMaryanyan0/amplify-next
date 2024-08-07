@@ -1,43 +1,49 @@
-// pages/index.js
+// index.js
+import { useEffect, useState } from 'react';
+import { ApolloClient, InMemoryCache, gql, HttpLink } from '@apollo/client';
+import fetch from 'cross-fetch';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-
-import { listPosts } from '../graphql/queries';
-import { fetchItems } from '../cosmosService';
-import UploadComponent from '../components/UploadComponent'; // Импортируйте компонент UploadComponent
-
-export default function Home() {
-    /*const [posts, setPosts] = useState([]);
+const IndexPage = () => {
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
-        fetchPosts();
-    }, []);
+        const client = new ApolloClient({
+            link: new HttpLink({
+                uri: 'http://localhost:3000/api/posts',
+                fetch,
+            }),
+            cache: new InMemoryCache(),
+        });
 
-    async function fetchPosts() {
-        const items = await fetchItems(listPosts);
-        setPosts(items);
-    }*/
+
+        client.query({
+            query: gql`
+                query {
+                    items {
+                        id
+                        name
+                        description
+                    }
+                }
+            `,
+        })
+
+        .then(result => setItems(result.data.items))
+        .catch(error => console.error(error));
+    }, []);
 
     return (
         <div>
-            <h1 className="text-3xl font-semibold tracking-wide mt-6 mb-8">Index page</h1>
-            {/*{
-                posts.map((post, index) => (
-                    <Link key={index} href={`/posts/${post.id}`}>
-                        <div className="my-6 pb-6 border-b border-gray-300">
-                            {
-                                post.coverImage && <img src={post.coverImage} className="w-56" />
-                            }
-                            <div className="cursor-pointer mt-2">
-                                <h2 className="text-xl font-semibold">{post.title}</h2>
-                                <p className="text-gray-500 mt-2">Author: {post.username}</p>
-                            </div>
-                        </div>
-                    </Link>
-                ))
-            }*/}
-            {/*<UploadComponent />  Используйте компонент UploadComponent */}
+            <h1>Index Page</h1>
+            <ul>
+                {items.map(item => (
+                    <li key={item.id}>
+                        <strong>{item.name}</strong>: {item.description}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
-}
+};
+
+export default IndexPage;

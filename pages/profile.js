@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { addItem, getItems } from '../cosmosService';
 
 function Profile() {
-    /*const [user, setUser] = useState(null);*/
+    const [user, setUser] = useState(null);
     const [items, setItems] = useState([]);
 
     useEffect(() => {
@@ -10,19 +10,19 @@ function Profile() {
         fetchItems();
     }, []);
 
-    /*async function checkUser() {
+    async function checkUser() {
         // Implement your authentication check with Azure here
         // Placeholder: Set user to a mock user object
         const user = { username: 'AzureUser', attributes: { email: 'user@azure.com' } };
         setUser(user);
-    }*/
+    }
 
     async function fetchItems() {
         const fetchedItems = await getItems();
         setItems(fetchedItems);
     }
 
-    /*if (!user) return null;*/
+    if (!user) return null;
 
     return (
         <div>
@@ -39,7 +39,7 @@ function Profile() {
                     ))}
                 </ul>
             </div>
-            {/*<button onClick={() => addItem({ id: '2', name: 'New Item' })}>Add Item</button>*/}
+            <button onClick={() => addItem({ id: '2', name: 'New Item' })}>Add Item</button>
         </div>
     );
 }

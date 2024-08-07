@@ -15,7 +15,7 @@ async function createDatabaseAndContainer() {
         const { database } = await client.databases.createIfNotExists({ id: process.env.COSMOS_DB_NAME });
         console.log(`Created database:\n${database.id}\n`);
 
-        const { container } = await database.containers.createIfNotExists({ id: "YourContainerName" });
+        const { container } = await database.containers.createIfNotExists({ id: process.env.COSMOS_DB_CONTAINER });
         console.log(`Created container:\n${container.id}\n`);
     } catch (err) {
         console.error('Error creating database and container:', err);

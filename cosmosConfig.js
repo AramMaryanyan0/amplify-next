@@ -1,4 +1,8 @@
+// cosmosConfig.js
 import { CosmosClient } from '@azure/cosmos';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const endpoint = process.env.COSMOS_DB_ENDPOINT;
 const key = process.env.COSMOS_DB_KEY;
@@ -6,9 +10,10 @@ const databaseId = process.env.COSMOS_DB_NAME;
 const containerId = process.env.COSMOS_DB_CONTAINER;
 
 console.log("COSMOS_DB_ENDPOINT:", endpoint);
-console.log("COSMOS_DB_KEY:", key ? "****" : "undefined");
+console.log("COSMOS_DB_KEY:", key);
 console.log("COSMOS_DB_NAME:", databaseId);
 console.log("COSMOS_DB_CONTAINER:", containerId);
+
 
 let container;
 
@@ -29,6 +34,16 @@ const connectToCosmosDB = async () => {
     }
 };
 
-connectToCosmosDB();
+const initialize = async () => {
+    await connectToCosmosDB();
+};
+
+(async () => {
+    try {
+        await initialize();
+    } catch (error) {
+        console.error("Initialization failed:", error);
+    }
+})();
 
 export { container };
