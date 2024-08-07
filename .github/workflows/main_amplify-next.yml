@@ -1,4 +1,4 @@
-name: Build and Deploy to Azure
+name: Build and Deploy
 
 on:
   push:
@@ -10,17 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
     - name: Set up Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v2
       with:
         node-version: '18'
 
     - name: Install dependencies
       run: npm install
 
-    - name: Build
+    - name: Build project
+      env:
+        COSMOS_DB_ENDPOINT: ${{ secrets.COSMOS_DB_ENDPOINT }}
+        COSMOS_DB_KEY: ${{ secrets.COSMOS_DB_KEY }}
+        COSMOS_DB_NAME: ${{ secrets.COSMOS_DB_NAME }}
+        COSMOS_DB_CONTAINER: ${{ secrets.COSMOS_DB_CONTAINER }}
       run: npm run build
 
     - name: Log in to Azure
